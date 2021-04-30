@@ -1,0 +1,3 @@
+user1xxx@ya.ru,foo@gmail.com,lol@mail.ru
+user1xxx@ya.ru,foo@gmail.com,lol@mail.ru
+user1xxx@ya.ru,foo@gmail.com,lol@mail.ru

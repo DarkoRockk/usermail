@@ -27,18 +27,18 @@ public class UserMailTest {
             out.printf("user3=xyz@pisem.net,vasya@pupkin.com");
             out.printf("user4=ups@pisem.net,aaa@bbb.ru");
             out.printf("user5=xyz@pisem.net");
-            UserMail mail = new UserMail("./" + filename);
-            mail.merge();
-            List<String> rsl = mail.getResult();
-            assertThat(rsl.size(), is(2));
-            assertThat(rsl.get(0).contains("xxx@ya.ru"), is(true));
-            assertThat(rsl.get(0).contains("foo@gmail.com"), is(true));
-            assertThat(rsl.get(0).contains("lol@mail.ru"), is(true));
-            assertThat(rsl.get(0).contains("ups@pisem.net"), is(true));
-            assertThat(rsl.get(0).contains("aaa@bbb.ru"), is(true));
-            assertThat(rsl.get(1).contains("xyz@pisem.net"), is(true));
-            assertThat(rsl.get(1).contains("vasya@pupkin.com"), is(true));
         }
+        UserMail mail = new UserMail("./" + filename);
+        mail.merge();
+        List<String> rsl = mail.getResult();
+        assertThat(rsl.size(), is(2));
+        assertThat(rsl.get(0).contains("xxx@ya.ru"), is(true));
+        assertThat(rsl.get(0).contains("foo@gmail.com"), is(true));
+        assertThat(rsl.get(0).contains("lol@mail.ru"), is(true));
+        assertThat(rsl.get(0).contains("ups@pisem.net"), is(true));
+        assertThat(rsl.get(0).contains("aaa@bbb.ru"), is(true));
+        assertThat(rsl.get(1).contains("xyz@pisem.net"), is(true));
+        assertThat(rsl.get(1).contains("vasya@pupkin.com"), is(true));
     }
 
     @Test(expected = FileNotFoundException.class)
@@ -46,20 +46,14 @@ public class UserMailTest {
         String filename = "users.txt";
         File source = folder.newFile(filename);
         try (PrintWriter out = new PrintWriter(source)) {
-            out.printf("user1xxx@ya.ru,foo@gmail.com,lol@mail.ru");
+            out.printf("user1=xxx@ya.ru,foo@gmail.com,lol@mail.ru");
             UserMail mail = new UserMail("./" + "ssss");
         }
     }
 
-//    @Test(expected = IllegalArgumentException.class)
-//    public void whenIllegalArgument() throws IOException {
-//        String filename = "users.txt";
-//        File source = folder.newFile(filename);
-//        try (PrintWriter out = new PrintWriter(source)) {
-//            out.printf("user1xxx@ya.ru,foo@gmail.com,lol@mail.ru");
-//            out.printf("user1xxx@ya.ru,foo@gmail.com,lol@mail.ru");
-//            out.printf("user1xxx@ya.ru,foo@gmail.com,lol@mail.ru");
-//            UserMail mail = new UserMail("./" + filename);
-//        }
-//    }
+    @Test(expected = IllegalArgumentException.class)
+    public void whenIllegalArgument() throws IOException {
+        String filename = "users-invalid.txt";
+        UserMail mail = new UserMail("./" + filename);
+    }
 }
